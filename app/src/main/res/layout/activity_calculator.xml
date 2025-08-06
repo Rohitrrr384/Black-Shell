@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_2"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Display Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="#2d2d2d"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:alpha="0.5"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp">
+
+        <!-- Previous Operation Display -->
+        <TextView
+            android:id="@+id/tvPreviousOperation"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
+            android:textColor="#888888"
+            android:textSize="18sp"
+            android:fontFamily="monospace" />
+
+        <!-- Current Display -->
+        <TextView
+            android:id="@+id/tvDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="end|center_vertical"
+            android:text="0"
+            android:textColor="#ffffff"
+            android:textSize="48sp"
+            android:fontFamily="monospace"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
+    </LinearLayout>
+
+    <!-- Button Grid -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:alpha="0.7"
+        android:orientation="vertical">
+
+        <!-- Row 1: Scientific Functions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btnSin"
+                style="@style/ScientificButtonStyle"
+                android:text="sin" />
+
+            <Button
+                android:id="@+id/btnCos"
+                style="@style/ScientificButtonStyle"
+                android:text="cos" />
+
+            <Button
+                android:id="@+id/btnTan"
+                style="@style/ScientificButtonStyle"
+                android:text="tan" />
+
+            <Button
+                android:id="@+id/btnLog"
+                style="@style/ScientificButtonStyle"
+                android:text="log" />
+
+            <Button
+                android:id="@+id/btnLn"
+                style="@style/ScientificButtonStyle"
+                android:text="ln" />
+
+        </LinearLayout>
+
+        <!-- Row 2: More Scientific Functions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btnSqrt"
+                style="@style/ScientificButtonStyle"
+                android:text="√" />
+
+            <Button
+                android:id="@+id/btnPower"
+                style="@style/ScientificButtonStyle"
+                android:text="x^y" />
+
+            <Button
+                android:id="@+id/btnFactorial"
+                style="@style/ScientificButtonStyle"
+                android:text="x!" />
+
+            <Button
+                android:id="@+id/btnPi"
+                style="@style/ScientificButtonStyle"
+                android:text="π" />
+
+            <Button
+                android:id="@+id/btnE"
+                style="@style/ScientificButtonStyle"
+                android:text="e" />
+
+        </LinearLayout>
+
+        <!-- Row 3: Memory and Clear Functions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btnMC"
+                style="@style/MemoryButtonStyle"
+                android:text="MC" />
+
+            <Button
+                android:id="@+id/btnMR"
+                style="@style/MemoryButtonStyle"
+                android:text="MR" />
+
+            <Button
+                android:id="@+id/btnMPlus"
+                style="@style/MemoryButtonStyle"
+                android:text="M+" />
+
+            <Button
+                android:id="@+id/btnClear"
+                style="@style/ClearButtonStyle"
+                android:text="C" />
+
+            <Button
+                android:id="@+id/btnBackspace"
+                style="@style/ClearButtonStyle"
+                android:text="⌫" />
+
+        </LinearLayout>
+
+        <!-- Row 4: Parentheses and Division -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btnOpenParen"
+                style="@style/OperatorButtonStyle"
+                android:text="(" />
+
+            <Button
+                android:id="@+id/btnCloseParen"
+                style="@style/OperatorButtonStyle"
+                android:text=")" />
+
+            <Button
+                android:id="@+id/btnPercent"
+                style="@style/OperatorButtonStyle"
+                android:text="%" />
+
+            <Button
+                android:id="@+id/btnDivide"
+                style="@style/OperatorButtonStyle"
+                android:text="÷" />
+
+            <Button
+                android:id="@+id/btnPlusMinus"
+                style="@style/OperatorButtonStyle"
+                android:text="±" />
+
+        </LinearLayout>
+
+        <!-- Row 5: Numbers 7-9 and Multiply -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btn7"
+                style="@style/NumberButtonStyle"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/btn8"
+                style="@style/NumberButtonStyle"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/btn9"
+                style="@style/NumberButtonStyle"
+                android:text="9" />
+
+            <Button
+                android:id="@+id/btnMultiply"
+                style="@style/OperatorButtonStyle"
+                android:text="×" />
+
+            <Button
+                android:id="@+id/btnSquare"
+                style="@style/ScientificButtonStyle"
+                android:text="x²" />
+
+        </LinearLayout>
+
+        <!-- Row 6: Numbers 4-6 and Subtract -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btn4"
+                style="@style/NumberButtonStyle"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/btn5"
+                style="@style/NumberButtonStyle"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/btn6"
+                style="@style/NumberButtonStyle"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/btnSubtract"
+                style="@style/OperatorButtonStyle"
+                android:text="−" />
+
+            <Button
+                android:id="@+id/btnInverse"
+                style="@style/ScientificButtonStyle"
+                android:text="1/x" />
+
+        </LinearLayout>
+
+        <!-- Row 7: Numbers 1-3 and Add -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btn1"
+                style="@style/NumberButtonStyle"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/btn2"
+                style="@style/NumberButtonStyle"
+                android:text="2" />
+
+            <Button
+                android:id="@+id/btn3"
+                style="@style/NumberButtonStyle"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                style="@style/OperatorButtonStyle"
+                android:text="+" />
+
+            <Button
+                android:id="@+id/btnAbs"
+                style="@style/ScientificButtonStyle"
+                android:text="|x|" />
+
+        </LinearLayout>
+
+        <!-- Row 8: Zero, Decimal and Equals -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_margin="4dp"
+                android:background="@drawable/number_button_bg"
+                android:text="0"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:fontFamily="monospace" />
+
+            <Button
+                android:id="@+id/btnDecimal"
+                style="@style/NumberButtonStyle"
+                android:text="." />
+
+            <Button
+                android:id="@+id/btnEquals"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_margin="4dp"
+                android:background="@drawable/equals_button_bg"
+                android:text="="
+                android:textColor="#ffffff"
+                android:textSize="28sp"
+                android:fontFamily="monospace" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+

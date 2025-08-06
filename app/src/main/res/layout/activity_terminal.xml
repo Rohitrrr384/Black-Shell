@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_2"
+    android:orientation="vertical">
+
+    <!-- Transparent Terminal Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#40000000"
+        android:elevation="4dp"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <!-- Terminal Title -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/ic_terminal"
+            android:drawablePadding="8dp"
+            android:fontFamily="monospace"
+            android:text="🐧 BLACK SHELL"
+            android:textColor="@color/kali_green"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_clear"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/kali_button_round"
+                android:backgroundTint="#60000000"
+                android:fontFamily="monospace"
+                android:text="🗑️"
+                android:textColor="@color/kali_text_primary"
+                android:textSize="12sp"
+                android:tooltipText="Clear Terminal" />
+
+            <Button
+                android:id="@+id/btn_file_manager"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/kali_button_round"
+                android:backgroundTint="#60000000"
+                android:fontFamily="monospace"
+                android:text="📁"
+                android:textColor="@color/kali_text_primary"
+                android:textSize="12sp"
+                android:tooltipText="Open File Manager" />
+
+            <Button
+                android:id="@+id/btn_keyboard"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/kali_button_round"
+                android:backgroundTint="#60000000"
+                android:fontFamily="monospace"
+                android:text="⌨️"
+                android:textColor="@color/kali_text_primary"
+                android:textSize="12sp"
+                android:tooltipText="Toggle Keyboard" />
+
+            <Button
+                android:id="@+id/btn_exit"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/kali_button_round"
+                android:backgroundTint="#60000000"
+                android:fontFamily="monospace"
+                android:text="❌"
+                android:textColor="@color/kali_red"
+                android:textSize="12sp"
+                android:tooltipText="Exit Terminal" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Transparent Terminal Content Container -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#20000000">
+
+        <!-- Terminal Output with Glass Effect -->
+        <ScrollView
+            android:id="@+id/scroll_terminal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/input_container"
+            android:layout_marginBottom="8dp"
+            android:background="#15000000"
+            android:scrollbars="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_terminal_output"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:padding="12dp"
+                android:scrollbars="vertical" />
+
+        </ScrollView>
+
+        <!-- Transparent Command Input Container -->
+        <LinearLayout
+            android:id="@+id/input_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#50000000"
+            android:elevation="8dp"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <!-- Prompt Display -->
+            <TextView
+                android:id="@+id/tv_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="┌──(black@shell)-[~]\n└─$ "
+                android:textColor="@color/kali_green"
+                android:textSize="14sp"
+                android:shadowColor="#000000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2" />
+
+            <!-- Command Input Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Command Input Field with Glass Effect -->
+                <EditText
+                    android:id="@+id/et_command_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#30FFFFFF"
+                    android:fontFamily="monospace"
+                    android:hint="Enter command..."
+                    android:imeOptions="actionDone"
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColor="@color/kali_text_primary"
+                    android:textColorHint="#80FFFFFF"
+                    android:textSize="14sp"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2" />
+
+                <!-- Execute Button -->
+                <Button
+                    android:id="@+id/btn_execute"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/kali_button_round"
+                    android:backgroundTint="#70000000"
+                    android:text="▶️"
+                    android:textColor="@color/kali_green"
+                    android:textSize="16sp"
+                    android:tooltipText="Execute Command" />
+
+            </LinearLayout>
+
+            <!-- Transparent Quick Command Shortcuts -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#20000000"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <Button
+                        android:id="@+id/btn_quick_ls"
+                        style="@style/KaliButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:background="#40FFFFFF"
+                        android:text="ls"
+                        android:textColor="@color/kali_green"
+                        android:fontFamily="monospace"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/btn_quick_pwd"
+                        style="@style/KaliButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:background="#40FFFFFF"
+                        android:text="pwd"
+                        android:textColor="@color/kali_green"
+                        android:fontFamily="monospace"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/btn_quick_cd"
+                        style="@style/KaliButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:background="#40FFFFFF"
+                        android:text="cd .."
+                        android:textColor="@color/kali_green"
+                        android:fontFamily="monospace"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/btn_quick_clear"
+                        style="@style/KaliButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:background="#40FFFFFF"
+                        android:text="clear"
+                        android:textColor="@color/kali_green"
+                        android:fontFamily="monospace"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/btn_quick_help"
+                        style="@style/KaliButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:background="#40FFFFFF"
+                        android:text="help"
+                        android:textColor="@color/kali_green"
+                        android:fontFamily="monospace"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/btn_quick_whoami"
+                        style="@style/KaliButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:background="#40FFFFFF"
+                        android:text="whoami"
+                        android:textColor="@color/kali_green"
+                        android:fontFamily="monospace"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+        <!-- Transparent Terminal Status Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/input_container"
+            android:background="#30000000"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="monospace"
+                android:text="💻 Terminal Ready"
+                android:textColor="@color/kali_text_tertiary"
+                android:textSize="10sp"
+                android:shadowColor="#000000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="🔄 Online"
+                android:textColor="@color/kali_green"
+                android:textSize="10sp"
+                android:shadowColor="#000000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!-- Transparent Terminal Tips -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#40000000"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="💡 Tip: Use Volume Up/Down for command history • Tab for auto-complete"
+            android:textColor="@color/kali_text_tertiary"
+            android:textSize="10sp"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/img_2"
+    android:fitsSystemWindows="true">
+
+    <!-- Top Status Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:alpha="0.5"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/status_bar_bg"
+        android:elevation="4dp"
+        android:padding="16dp">
+
+        <!-- First Row: Welcome Text and Time -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="root@black-shell:~#"
+                android:textColor="@color/kali_green"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace" />
+
+            <TextView
+                android:id="@+id/timeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textColor="@color/terminal_white"
+                android:textSize="16sp"
+                android:fontFamily="monospace"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Second Row: System Status -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Battery Status -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginRight="24dp">
+
+                <ImageView
+                    android:id="@+id/batteryIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_battery"
+                    android:layout_marginRight="8dp"
+                    app:tint="@color/kali_green" />
+
+                <ProgressBar
+                    android:id="@+id/batteryProgress"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="8dp"
+                    android:max="100"
+                    android:progress="75"
+                    android:progressTint="@color/kali_green"
+                    android:progressBackgroundTint="@color/terminal_light_gray"
+                    android:layout_marginRight="8dp" />
+
+                <TextView
+                    android:id="@+id/batteryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="75%"
+                    android:textColor="@color/terminal_white"
+                    android:textSize="12sp"
+                    android:fontFamily="monospace" />
+
+            </LinearLayout>
+
+            <!-- Network Status -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/networkIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_network"
+                    android:layout_marginRight="8dp"
+                    app:tint="@color/kali_green" />
+
+                <TextView
+                    android:id="@+id/networkSpeedText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 KB/s ↓ 0 KB/s ↑"
+                    android:textColor="@color/terminal_white"
+                    android:textSize="11sp"
+                    android:fontFamily="monospace" />
+
+            </LinearLayout>
+
+            <!-- Logout Button -->
+            <Button
+                android:id="@+id/logoutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="LOGOUT"
+                android:backgroundTint="#00ff41"
+                android:textColor="@color/terminal_black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Main Content Area with Thin Sidebar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <!-- Thin Transparent Sidebar with Icons Only -->
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#30000000"
+            android:elevation="2dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <!-- Scrollable Icon List -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <!-- Terminal Icon -->
+                    <ImageView
+                        android:id="@+id/terminalIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_terminal"
+                        android:layout_marginBottom="12dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Terminal"
+                        app:tint="@color/kali_green" />
+
+                    <!-- Text Editor Icon -->
+                    <ImageView
+                        android:id="@+id/textEditorIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_editor"
+                        android:layout_marginBottom="12dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Text Editor"
+                        app:tint="@color/kali_green" />
+
+                    <!-- Calculator Icon -->
+                    <ImageView
+                        android:id="@+id/calculatorIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_calculator"
+                        android:layout_marginBottom="12dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Calculator"
+                        app:tint="@color/kali_green" />
+
+                    <!-- Browser Icon -->
+                    <ImageView
+                        android:id="@+id/browserIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_browser"
+                        android:layout_marginBottom="16dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Browser"
+                        app:tint="@color/kali_green" />
+
+                    <!-- Section Divider -->
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="1dp"
+                        android:background="@color/kali_green"
+                        android:layout_marginBottom="16dp"
+                        android:alpha="0.5" />
+
+                    <!-- Settings Icon -->
+                    <ImageView
+                        android:id="@+id/settingsIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_settings"
+                        android:layout_marginBottom="12dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Settings"
+                        app:tint="@color/kali_green" />
+
+                    <!-- File Manager Icon -->
+                    <ImageView
+                        android:id="@+id/fileManagerIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_folder"
+                        android:layout_marginBottom="12dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Files"
+                        app:tint="@color/kali_green" />
+
+                    <!-- Network Tools Icon -->
+                    <ImageView
+                        android:id="@+id/networkToolsIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_network_tools"
+                        android:layout_marginBottom="12dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Network"
+                        app:tint="@color/kali_green" />
+
+                    <!-- System Info Icon -->
+                    <ImageView
+                        android:id="@+id/systemInfoIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_system_info"
+                        android:layout_marginBottom="16dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="System Info"
+                        app:tint="@color/kali_green" />
+
+                    <!-- Section Divider -->
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="1dp"
+                        android:background="@color/kali_green"
+                        android:layout_marginBottom="16dp"
+                        android:alpha="0.5" />
+
+                    <!-- Crypto Tools Icon -->
+                    <ImageView
+                        android:id="@+id/cryptoToolsIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_crypto"
+                        android:layout_marginBottom="12dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Crypto Tools"
+                        app:tint="@color/kali_green" />
+
+                    <!-- Password Gen Icon -->
+                    <ImageView
+                        android:id="@+id/passwordGenIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_password"
+                        android:layout_marginBottom="12dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Password Gen"
+                        app:tint="@color/kali_green" />
+
+                    <!-- WiFi Analyzer Icon -->
+                    <ImageView
+                        android:id="@+id/wifiAnalyzerIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_wifi"
+                        android:layout_marginBottom="12dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="WiFi Analyzer"
+                        app:tint="@color/kali_green" />
+
+                    <!-- Port Scanner Icon -->
+                    <ImageView
+                        android:id="@+id/portScannerIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_port_scanner"
+                        android:layout_marginBottom="12dp"
+                        android:padding="4dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Port Scanner"
+                        app:tint="@color/kali_green" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+        <!-- Main Desktop Area -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp">
+
+            <!-- Desktop content -->
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

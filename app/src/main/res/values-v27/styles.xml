@@ -1,0 +1,188 @@
+<resources>
+    <!-- App Theme -->
+    <style name="KaliAlertDialog" parent="Theme.Material3.DayNight.Dialog.Alert">
+        <item name="android:windowBackground">@color/kali_surface</item>
+        <item name="android:textColorPrimary">@color/kali_text_primary</item>
+    </style>
+
+
+    <style name="KaliFileManagerTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:windowBackground">@color/kali_background</item>
+        <item name="android:colorBackground">@color/kali_background</item>
+        <item name="android:textColorPrimary">@color/kali_text_primary</item>
+        <item name="android:textColorSecondary">@color/kali_text_secondary</item>
+        <item name="android:statusBarColor">@color/kali_surface_variant</item>
+        <item name="android:navigationBarColor">@color/kali_surface_variant</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <!-- Custom Button Style -->
+    <style name="KaliButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/kali_text_primary</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="backgroundTint">@color/kali_surface_variant</item>
+    </style>
+
+    <!-- Custom EditText Style -->
+    <style name="KaliEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">@color/kali_text_primary</item>
+        <item name="android:textColorHint">@color/kali_text_tertiary</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="NumberButtonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@drawable/number_button_bg</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <style name="OperatorButtonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@drawable/operator_button_bg</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <style name="ScientificButtonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@drawable/scientific_button_bg</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <style name="MemoryButtonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@drawable/memory_button_bg</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <style name="ClearButtonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@drawable/clear_button_bg</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">#2d2d30</item>
+        <item name="colorPrimaryDark">#1e1e1e</item>
+        <item name="colorAccent">#4ec9b0</item>
+        <item name="android:windowBackground">#1e1e1e</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:textColorSecondary">#cccccc</item>
+    </style>
+
+    <!-- Terminal Editor Theme -->
+    <style name="TerminalEditorTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#2d2d30</item>
+        <item name="colorPrimaryDark">#1e1e1e</item>
+        <item name="colorAccent">#4ec9b0</item>
+        <item name="android:windowBackground">#1e1e1e</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:textColorSecondary">#cccccc</item>
+        <item name="android:statusBarColor">#1e1e1e</item>
+        <item name="android:navigationBarColor">#1e1e1e</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Button Styles -->
+    <style name="TerminalButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">32dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="rippleColor">#4ec9b0</item>
+    </style>
+
+    <!-- EditText Styles -->
+    <style name="TerminalEditText" parent="Widget.MaterialComponents.TextInputEditText.FilledBox">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColorHint">#666666</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_drawable</item>
+    </style>
+
+    <!-- TextView Styles -->
+    <style name="TerminalText" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="LineNumberText" parent="TerminalText">
+        <item name="android:textColor">#858585</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+    <style name="StatusText" parent="TerminalText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#cccccc</item>
+    </style>
+
+    <style name="PromptText" parent="TerminalText">
+        <item name="android:textColor">#4ec9b0</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Dialog Styles -->
+    <style name="TerminalDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:windowBackground">#2d2d30</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="colorAccent">#4ec9b0</item>
+        <item name="buttonBarPositiveButtonStyle">@style/TerminalDialogButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/TerminalDialogButton</item>
+        <item name="buttonBarNeutralButtonStyle">@style/TerminalDialogButton</item>
+    </style>
+
+    <style name="TerminalDialogButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#4ec9b0</item>
+    </style>
+
+    <!-- Toolbar Style -->
+    <style name="TerminalToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">#2d2d30</item>
+        <item name="titleTextColor">#ffffff</item>
+        <item name="subtitleTextColor">#cccccc</item>
+    </style>
+
+    <!-- ScrollView Style -->
+    <style name="TerminalScrollView">
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
+        <item name="android:scrollbarTrackVertical">@drawable/scrollbar_track</item>
+    </style>
+</resources>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_2"
+    android:fitsSystemWindows="true">
+
+    <!-- Background blur overlay -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#70000000" />
+
+    <!-- Main login container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:background="#50000000"
+        android:padding="32dp">
+
+        <!-- Kali Linux Logo/Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginBottom="40dp">
+
+            <!-- Terminal Icon -->
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_terminal"
+                android:layout_marginBottom="16dp"
+                app:tint="@color/kali_green" />
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BLACK SHELL"
+                android:textColor="@color/kali_green"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="root@kali:~#"
+                android:textColor="@color/terminal_gray"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+
+        <!-- Login Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#60161B22"
+            android:padding="24dp"
+            android:elevation="8dp">
+
+            <!-- Username Field -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="USERNAME"
+                    android:textColor="@color/kali_green"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/usernameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="#5021262D"
+                    android:textColor="@color/terminal_white"
+                    android:textColorHint="@color/terminal_gray"
+                    android:hint="root"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:fontFamily="monospace"
+                    android:textSize="16sp"
+                    android:maxLines="1"
+                    android:drawableLeft="@drawable/ic_user"
+                    android:drawablePadding="12dp"
+                    android:drawableTint="@color/kali_green" />
+
+            </LinearLayout>
+
+            <!-- Password Field -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PASSWORD"
+                    android:textColor="@color/kali_green"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="#5021262D"
+                    android:textColor="@color/terminal_white"
+                    android:textColorHint="@color/terminal_gray"
+                    android:hint="••••••••"
+                    android:inputType="textPassword"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:fontFamily="monospace"
+                    android:textSize="16sp"
+                    android:maxLines="1"
+                    android:drawableLeft="@drawable/ic_lock"
+                    android:drawablePadding="12dp"
+                    android:drawableTint="@color/kali_green" />
+
+            </LinearLayout>
+
+            <!-- Action Button -->
+            <Button
+                android:id="@+id/actionButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="LOGIN"
+                android:backgroundTint="#8000ff41"
+                android:textColor="@color/terminal_black"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:textSize="16sp"
+                android:elevation="4dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Toggle Text -->
+            <TextView
+                android:id="@+id/toggleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Don't have an account? Signup"
+                android:textColor="@color/terminal_gray"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground" />
+
+        </LinearLayout>
+
+        <!-- Footer -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Penetration Testing &amp; Security"
+            android:textColor="@color/terminal_gray"
+            android:textSize="12sp"
+            android:fontFamily="monospace"
+            android:layout_marginTop="24dp"
+            android:alpha="0.7" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,261 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/img_2"
+    android:fitsSystemWindows="true">
+
+    <!-- Top Status Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FF21262D"
+        android:padding="8dp"
+        android:elevation="4dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="File Manager - black shell"
+            android:textColor="#FF58A6FF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:id="@+id/tv_disk_usage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Free: 45.2GB"
+            android:textColor="#FF7C3AED"
+            android:textSize="11sp"
+            android:fontFamily="monospace" />
+
+    </LinearLayout>
+
+    <!-- Navigation Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:alpha="0.4"
+        android:background="#FF161B22"
+        android:padding="4dp">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
+            android:layout_height="32dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="←"
+            android:textColor="#FFADBAC7"
+            android:textSize="18sp"
+            android:layout_marginEnd="2dp" />
+
+        <Button
+            android:id="@+id/btn_up"
+            android:layout_width="40dp"
+            android:layout_height="32dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="↑"
+            android:textColor="#FFADBAC7"
+            android:textSize="16sp"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/btn_home"
+            android:layout_width="40dp"
+            android:layout_height="32dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="🏠"
+            android:textSize="14sp"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/btn_root"
+            android:layout_width="40dp"
+            android:layout_height="32dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="/"
+            android:textColor="#FFFF6B6B"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp" />
+
+    </LinearLayout>
+
+    <!-- Current Path Display -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:alpha="0.4"
+        android:background="#FF21262D"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="┌──(black㉿shell)-["
+            android:textColor="#FF7C3AED"
+            android:textSize="12sp"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:id="@+id/tv_current_path"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="~/Desktop"
+            android:textColor="#FF58A6FF"
+            android:textSize="12sp"
+            android:fontFamily="monospace"
+            android:maxLines="1"
+            android:ellipsize="middle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="]"
+            android:textColor="#FF7C3AED"
+            android:textSize="12sp"
+            android:fontFamily="monospace" />
+
+    </LinearLayout>
+
+    <!-- File List Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FF161B22"
+        android:alpha="0.4"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Name"
+            android:textColor="#FFADBAC7"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Size"
+            android:textColor="#FFADBAC7"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:gravity="end" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Perms"
+            android:textColor="#FFADBAC7"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <!-- Separator Line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FF30363D" />
+
+    <!-- File List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_file_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:alpha="0.4"
+        android:background="#FF0D1117"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false" />
+
+    <!-- Bottom Action Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FF21262D"
+        android:padding="6dp"
+        android:elevation="4dp">
+
+        <Button
+            android:id="@+id/btn_new_folder"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="2dp"
+            android:background="#FF238636"
+            android:text="📁 New"
+            android:textColor="#FFFFFFFF"
+            android:textSize="10sp"
+            android:fontFamily="monospace" />
+
+        <Button
+            android:id="@+id/btn_new_file"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="2dp"
+            android:background="#FF1F6FEB"
+            android:text="📄 File"
+            android:textColor="#FFFFFFFF"
+            android:textSize="10sp"
+            android:fontFamily="monospace" />
+
+        <Button
+            android:id="@+id/btn_terminal"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="2dp"
+            android:background="#FF7C3AED"
+            android:text="💻 Term"
+            android:textColor="#FFFFFFFF"
+            android:textSize="10sp"
+            android:fontFamily="monospace" />
+
+        <Button
+            android:id="@+id/btn_paste"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="2dp"
+            android:background="#FFDA7A0A"
+            android:text="📋 Paste"
+            android:textColor="#FFFFFFFF"
+            android:textSize="10sp"
+            android:fontFamily="monospace" />
+
+        <Button
+            android:id="@+id/btn_refresh"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:background="#FF6E7681"
+            android:text="🔄 Refresh"
+            android:textColor="#FFFFFFFF"
+            android:textSize="10sp"
+            android:fontFamily="monospace" />
+
+    </LinearLayout>
+
+</LinearLayout>

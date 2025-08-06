@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FF21262D"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/tv_menu_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="filename.txt"
+        android:textColor="#FF58A6FF"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:background="#FF161B22"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Menu Options -->
+    <TextView
+        android:id="@+id/menu_open"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📂 Open"
+        android:textColor="#FFF0F6FC"
+        android:textSize="14sp"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:background="?android:attr/selectableItemBackground" />
+
+    <TextView
+        android:id="@+id/menu_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="✏️ Edit"
+        android:textColor="#FFF0F6FC"
+        android:textSize="14sp"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:background="?android:attr/selectableItemBackground" />
+
+    <TextView
+        android:id="@+id/menu_copy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📋 Copy"
+        android:textColor="#FFF0F6FC"
+        android:textSize="14sp"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:background="?android:attr/selectableItemBackground" />
+
+    <TextView
+        android:id="@+id/menu_cut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="✂️ Cut"
+        android:textColor="#FFF0F6FC"
+        android:textSize="14sp"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:background="?android:attr/selectableItemBackground" />
+
+    <TextView
+        android:id="@+id/menu_rename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🏷️ Rename"
+        android:textColor="#FFF0F6FC"
+        android:textSize="14sp"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:background="?android:attr/selectableItemBackground" />
+
+    <TextView
+        android:id="@+id/menu_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🗑️ Delete"
+        android:textColor="#FFFF6B6B"
+        android:textSize="14sp"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:background="?android:attr/selectableItemBackground" />
+
+    <TextView
+        android:id="@+id/menu_properties"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ℹ️ Properties"
+        android:textColor="#FFF0F6FC"
+        android:textSize="14sp"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:background="?android:attr/selectableItemBackground" />
+
+    <TextView
+        android:id="@+id/menu_terminal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="💻 Open in Terminal"
+        android:textColor="#FF7C3AED"
+        android:textSize="14sp"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:background="?android:attr/selectableItemBackground" />
+
+</LinearLayout>

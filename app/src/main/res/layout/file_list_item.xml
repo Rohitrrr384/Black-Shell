@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:minHeight="48dp">
+
+    <!-- File Icon -->
+    <TextView
+        android:id="@+id/tv_file_icon"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="📁"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginEnd="12dp" />
+
+    <!-- File Info Container -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <!-- File Name -->
+        <TextView
+            android:id="@+id/tv_file_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="filename.txt"
+            android:textColor="#FFF0F6FC"
+            android:textSize="14sp"
+            android:fontFamily="monospace"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <!-- File Type/Extension -->
+        <TextView
+            android:id="@+id/tv_file_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Text file"
+            android:textColor="#FF7D8590"
+            android:textSize="11sp"
+            android:fontFamily="monospace"
+            android:layout_marginTop="2dp" />
+
+    </LinearLayout>
+
+    <!-- File Size -->
+    <TextView
+        android:id="@+id/tv_file_size"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:text="1.2 KB"
+        android:textColor="#FF58A6FF"
+        android:textSize="11sp"
+        android:fontFamily="monospace"
+        android:gravity="end"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Permissions -->
+    <TextView
+        android:id="@+id/tv_permissions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:text="rwx"
+        android:textColor="#FF39D353"
+        android:textSize="11sp"
+        android:fontFamily="monospace"
+        android:gravity="center" />
+
+    <!-- Context Menu Indicator -->
+    <TextView
+        android:id="@+id/tv_context_menu"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="⋮"
+        android:textColor="#FF6E7681"
+        android:textSize="16sp"
+        android:gravity="center" />
+
+</LinearLayout>

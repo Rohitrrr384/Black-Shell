@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/img_2"
+    >
+
+    <!-- Top App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="4dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#2d2d30"
+            app:title="Terminal Text Editor"
+            app:titleTextColor="#ffffff"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Terminal Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#2d2d30"
+        android:padding="8dp"
+        android:elevation="2dp">
+
+        <TextView
+            android:id="@+id/terminalPrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user@editor:~$ "
+            android:textColor="#4ec9b0"
+            android:fontFamily="monospace"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/currentFilePath"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="untitled.txt"
+            android:textColor="#ffffff"
+            android:fontFamily="monospace"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/fileStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="●"
+            android:textColor="#f92672"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp" />
+
+    </LinearLayout>
+
+    <!-- Quick Action Bar -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#383838"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/btnNew"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="New"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:minWidth="0dp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnOpen"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Open"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:minWidth="0dp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnSave"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Save"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:minWidth="0dp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnSaveAs"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Save As"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:minWidth="0dp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnUndo"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Undo"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:minWidth="0dp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnRedo"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Redo"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:minWidth="0dp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnFind"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Find"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:minWidth="0dp"
+                android:layout_marginEnd="4dp" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <!-- Search Bar (Initially Hidden) -->
+    <LinearLayout
+        android:id="@+id/searchContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#404040"
+        android:padding="8dp"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:hint="Search..."
+            android:textColorHint="#888888"
+            android:textColor="#ffffff"
+            android:background="@android:color/transparent"
+            android:fontFamily="monospace"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnSearchNext"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Next"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:minWidth="0dp" />
+
+        <Button
+            android:id="@+id/btnSearchClose"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="×"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:minWidth="0dp" />
+
+    </LinearLayout>
+
+    <!-- Status Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#3c3c3c"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/lineInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ln 1, Col 1"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:id="@+id/charCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 chars"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:fontFamily="monospace"
+            android:layout_marginEnd="16dp" />
+
+        <TextView
+            android:id="@+id/encoding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UTF-8"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:fontFamily="monospace" />
+
+    </LinearLayout>
+
+    <!-- Main Editor Container -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#1e1e1e">
+
+        <!-- Line Numbers -->
+        <ScrollView
+            android:id="@+id/lineNumberScrollView"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="#2d2d30"
+            android:scrollbars="none"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/lineNumbers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1\n"
+                android:textColor="#858585"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:gravity="end"
+                android:padding="8dp"
+                android:lineSpacingExtra="4dp" />
+
+        </ScrollView>
+
+        <!-- Main Editor -->
+        <ScrollView
+            android:id="@+id/editorScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="60dp"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false"
+            android:fillViewport="true">
+
+            <EditText
+                android:id="@+id/textEditor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:textColor="#ffffff"
+                android:textColorHint="#666666"
+                android:hint="Start typing your code or text..."
+                android:fontFamily="monospace"
+                android:textSize="14sp"
+                android:padding="8dp"
+                android:gravity="top|start"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:scrollbars="none"
+                android:lineSpacingExtra="4dp"
+                 />
+
+        </ScrollView>
+
+        <!-- Syntax highlighting overlay (for future implementation) -->
+        <View
+            android:id="@+id/syntaxOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="60dp"
+            android:background="@android:color/transparent"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <!-- Bottom Terminal Command Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#2d2d30"
+        android:padding="8dp"
+        android:elevation="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":$ "
+            android:textColor="#4ec9b0"
+            android:fontFamily="monospace"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/commandInput"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:textColor="#ffffff"
+            android:fontFamily="monospace"
+            android:textSize="14sp"
+            android:hint="Enter command (type 'help' for commands)"
+            android:textColorHint="#666666"
+            android:inputType="text"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/btnExecuteCommand"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Execute"
+            android:textColor="#4ec9b0"
+            android:textSize="12sp"
+            android:minWidth="0dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Kali Linux Color Scheme -->
+    <color name="kali_dark_green">#00cc33</color>
+    <color name="terminal_black">#0d1117</color>
+    <color name="terminal_dark">#161b22</color>
+    <color name="terminal_darker">#21262d</color>
+    <color name="terminal_white">#f0f6fc</color>
+    <color name="terminal_gray">#8b949e</color>
+    <color name="terminal_light_gray">#30363d</color>
+    <color name="battery_low">#ff4444</color>
+    <color name="battery_medium">#ffaa00</color>
+    <color name="battery_high">#00ff41</color>
+
+    <color name="kali_surface_variant">#FF21262D</color>
+    <color name="kali_border">#FF30363D</color>
+
+    <!-- Text Colors -->
+    <color name="kali_background">#0D1117</color>
+    <color name="kali_terminal_background">#161B22</color>
+    <color name="kali_surface">#21262D</color>
+    <color name="kali_surface_dark">#1C2128</color>
+
+    <!-- Kali Terminal Colors -->
+    <color name="kali_green">#00FF41</color>
+    <color name="kali_blue">#367BF0</color>
+    <color name="kali_red">#F85149</color>
+    <color name="kali_orange">#FB8500</color>
+    <color name="kali_yellow">#FFD23F</color>
+    <color name="kali_purple">#A855F7</color>
+
+    <!-- Text Colors -->
+    <color name="kali_text_primary">#F0F6FC</color>
+    <color name="kali_text_secondary">#8B949E</color>
+    <color name="kali_text_tertiary">#6E7681</color>
+    <color name="kali_text_disabled">#484F58</color>
+
+    <!-- Accent Colors -->
+    <color name="kali_accent">#238636</color>
+    <color name="kali_accent_secondary">#1F6FEB</color>
+
+    <!-- Terminal Specific -->
+    <color name="kali_prompt_green">#00FF41</color>
+    <color name="kali_command_blue">#58A6FF</color>
+    <color name="kali_error_red">#FF7B72</color>
+    <color name="kali_success_green">#56D364</color>
+
+    <!-- Button and Input Colors -->
+    <color name="kali_button_background">#238636</color>
+    <color name="kali_button_background_secondary">#1F6FEB</color>
+    <color name="kali_input_background">#0D1117</color>
+    <color name="kali_input_border">#30363D</color>
+
+    <!-- Button Colors -->
+    <color name="kali_button_success">#FF238636</color>
+    <color name="kali_button_primary">#FF1F6FEB</color>
+    <color name="kali_button_secondary">#FF6E7681</color>
+
+    <!-- Special -->
+    <color name="kali_selection">#FF264F78</color>
+    <color name="kali_hover">#FF21262D</color>
+
+    <color name="terminal_background">#1e1e1e</color>
+    <color name="terminal_surface">#2d2d30</color>
+    <color name="terminal_surface_variant">#383838</color>
+    <color name="terminal_outline">#404040</color>
+
+    <!-- Text Colors -->
+    <color name="terminal_text_primary">#ffffff</color>
+    <color name="terminal_text_secondary">#cccccc</color>
+    <color name="terminal_text_hint">#666666</color>
+    <color name="terminal_text_disabled">#444444</color>
+
+    <!-- Accent Colors -->
+    <color name="terminal_accent">#4ec9b0</color>
+    <color name="terminal_accent_variant">#3a9a7f</color>
+    <color name="terminal_error">#f92672</color>
+    <color name="terminal_warning">#e6db74</color>
+    <color name="terminal_success">#a6e22e</color>
+
+    <!-- Line Numbers -->
+    <color name="line_number_background">#2d2d30</color>
+    <color name="line_number_text">#858585</color>
+    <color name="line_number_active">#ffffff</color>
+
+    <!-- File Status Colors -->
+    <color name="file_modified">#f92672</color>
+    <color name="file_saved">#a6e22e</color>
+    <color name="file_unsaved">#e6db74</color>
+
+    <!-- Syntax Highlighting Colors -->
+    <color name="syntax_keyword">#66d9ef</color>
+    <color name="syntax_string">#e6db74</color>
+    <color name="syntax_comment">#75715e</color>
+    <color name="syntax_number">#ae81ff</color>
+    <color name="syntax_function">#a6e22e</color>
+    <color name="syntax_variable">#fd971f</color>
+    <color name="syntax_operator">#f92672</color>
+    <color name="syntax_bracket">#f8f8f2</color>
+
+    <!-- Selection Colors -->
+    <color name="selection_background">#3e3d32</color>
+    <color name="selection_handle">#4ec9b0</color>
+
+    <!-- Search Colors -->
+    <color name="search_match">#49483e</color>
+    <color name="search_current">#3e3d32</color>
+
+    <!-- Standard Material Colors -->
+    <color name="colorPrimary">#2d2d30</color>
+    <color name="colorPrimaryDark">#1e1e1e</color>
+    <color name="colorAccent">#4ec9b0</color>
+    <color name="colorSurface">#2d2d30</color>
+    <color name="colorBackground">#1e1e1e</color>
+    <color name="colorOnPrimary">#ffffff</color>
+    <color name="colorOnSecondary">#ffffff</color>
+    <color name="colorOnBackground">#ffffff</color>
+    <color name="colorOnSurface">#ffffff</color>
+
+    <!-- Ripple Effects -->
+    <color name="ripple_light">#33ffffff</color>
+    <color name="ripple_dark">#33000000</color>
+    <color name="ripple_accent">#334ec9b0</color>
+</resources>
+
