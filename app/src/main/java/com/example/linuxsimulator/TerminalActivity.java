@@ -55,7 +55,7 @@ public class TerminalActivity extends AppCompatActivity {
     private int colorPrompt, colorCommand, colorOutput, colorError, colorSuccess;
 
     // Gemini API - CHANGE THIS TO YOUR API KEY
-    private static final String GEMINI_API_KEY = "AIzaSyBy699j7OZqxblmZ2L77qrjEsQFwrT68qk";
+    private static final String GEMINI_API_KEY = "add_your_api_key_here";
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + GEMINI_API_KEY;
     private OkHttpClient httpClient;
     private AlertDialog explanationDialog;
