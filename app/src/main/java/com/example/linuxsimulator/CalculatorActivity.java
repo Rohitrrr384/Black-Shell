@@ -207,7 +207,7 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         }
     }
 
-    private double evaluateExpression(String expression) {
+    double evaluateExpression(String expression) {
         // Remove spaces and replace display operators with standard ones
         expression = expression.replaceAll("\\s+", "")
                 .replace("×", "*")
@@ -235,24 +235,34 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
             } else if (c == '(') {
                 operators.push(c);
             } else if (c == ')') {
-                while (operators.peek() != '(') {
+                // ✅ check for empty stacks
+                while (!operators.isEmpty() && operators.peek() != '(') {
+                    if (values.size() < 2) throw new ArithmeticException("Invalid expression");
                     values.push(applyOperation(operators.pop(), values.pop(), values.pop()));
                 }
+                if (operators.isEmpty()) throw new ArithmeticException("Mismatched parentheses");
                 operators.pop();
             } else if (isOperator(c)) {
                 while (!operators.empty() && hasPrecedence(c, operators.peek())) {
+                    if (values.size() < 2) throw new ArithmeticException("Invalid expression");
                     values.push(applyOperation(operators.pop(), values.pop(), values.pop()));
                 }
                 operators.push(c);
+            } else {
+                // Invalid symbol
+                throw new ArithmeticException("Invalid character in expression");
             }
         }
 
         while (!operators.empty()) {
+            if (values.size() < 2) throw new ArithmeticException("Invalid expression");
             values.push(applyOperation(operators.pop(), values.pop(), values.pop()));
         }
 
+        if (values.isEmpty()) throw new ArithmeticException("Empty expression");
         return values.pop();
     }
+
 
     private boolean isOperator(char c) {
         return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
@@ -360,7 +370,7 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         }
     }
 
-    private double factorial(int n) {
+    double factorial(int n) {
         if (n <= 1) return 1;
         double result = 1;
         for (int i = 2; i <= n; i++) {

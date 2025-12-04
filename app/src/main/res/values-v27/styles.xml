@@ -1,7 +1,7 @@
 <resources>
     <!-- App Theme -->
     <style name="KaliAlertDialog" parent="Theme.Material3.DayNight.Dialog.Alert">
-        <item name="android:windowBackground">@color/kali_surface</item>
+        <item name="android:windowBackground">@color/kali_text_primary</item>
         <item name="android:textColorPrimary">@color/kali_text_primary</item>
     </style>
 

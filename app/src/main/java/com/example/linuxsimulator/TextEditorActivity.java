@@ -61,6 +61,7 @@ public class TextEditorActivity extends AppCompatActivity {
     // Undo/Redo System
     private Stack<String> undoStack = new Stack<>();
     private Stack<String> redoStack = new Stack<>();
+    private boolean isUndoRedoOperation = false;
 
     // Search
     private int currentSearchPosition = -1;
@@ -76,9 +77,19 @@ public class TextEditorActivity extends AppCompatActivity {
 
         initializeViews();
         setupEventListeners();
+        setupBackPressHandler();
         requestStoragePermission();
         updateLineNumbers();
         updateStatusBar();
+
+        // Load file if path is provided
+        String filePath = getIntent().getStringExtra("filePath");
+        if (filePath != null) {
+            File file = new File(filePath);
+            if (file.exists()) {
+                loadFile(file);
+            }
+        }
     }
 
     private void initializeViews() {
@@ -105,18 +116,23 @@ public class TextEditorActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 updateLineNumbers();
                 updateStatusBar();
-                setModified(true);
+                if (!isUndoRedoOperation) {
+                    setModified(true);
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                // Save current state for undo
-                if (undoStack.isEmpty() || !undoStack.peek().equals(s.toString())) {
-                    undoStack.push(s.toString());
-                    if (undoStack.size() > 50) { // Limit undo stack size
-                        undoStack.remove(0);
+                // Save current state for undo (only if not undo/redo operation)
+                if (!isUndoRedoOperation) {
+                    String currentText = s.toString();
+                    if (undoStack.isEmpty() || !undoStack.peek().equals(currentText)) {
+                        undoStack.push(currentText);
+                        if (undoStack.size() > 50) { // Limit undo stack size
+                            undoStack.remove(0);
+                        }
+                        redoStack.clear();
                     }
-                    redoStack.clear();
                 }
             }
         });
@@ -161,15 +177,24 @@ public class TextEditorActivity extends AppCompatActivity {
     private void requestStoragePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!Environment.isExternalStorageManager()) {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                intent.setData(Uri.parse("package:" + getPackageName()));
-                startActivity(intent);
+                try {
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                    intent.setData(Uri.parse("package:" + getPackageName()));
+                    startActivity(intent);
+                    showToast("Please grant storage permission");
+                } catch (Exception e) {
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                    startActivity(intent);
+                }
             }
         } else {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        new String[]{
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_EXTERNAL_STORAGE
+                        },
                         STORAGE_PERMISSION_CODE);
             }
         }
@@ -184,9 +209,12 @@ public class TextEditorActivity extends AppCompatActivity {
     }
 
     private void createNewFile() {
+        isUndoRedoOperation = true;
         textEditor.setText("");
+        isUndoRedoOperation = false;
         currentFile = null;
         currentFilePath.setText("untitled.txt");
+        originalContent = "";
         setModified(false);
         undoStack.clear();
         redoStack.clear();
@@ -202,8 +230,11 @@ public class TextEditorActivity extends AppCompatActivity {
     }
 
     private void selectFileToOpen() {
-        // File browser implementation
-        File storageDir = Environment.getExternalStorageDirectory();
+        // Get app's documents directory (more reliable than external storage)
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+        if (storageDir == null || !storageDir.exists()) {
+            storageDir = Environment.getExternalStorageDirectory();
+        }
         showFileDialog(storageDir, true, this::loadFile);
     }
 
@@ -217,16 +248,21 @@ public class TextEditorActivity extends AppCompatActivity {
             }
             reader.close();
 
+            isUndoRedoOperation = true;
             textEditor.setText(content.toString());
+            isUndoRedoOperation = false;
+
             currentFile = file;
             currentFilePath.setText(file.getName());
             originalContent = content.toString();
             setModified(false);
             undoStack.clear();
             redoStack.clear();
+            undoStack.push(content.toString()); // Add initial state
             showToast("File opened: " + file.getName());
         } catch (IOException e) {
             showToast("Error opening file: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -239,12 +275,28 @@ public class TextEditorActivity extends AppCompatActivity {
     }
 
     private void saveAsFile() {
-        File storageDir = Environment.getExternalStorageDirectory();
+        // Use app's documents directory for saving
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+        if (storageDir == null || !storageDir.exists()) {
+            storageDir = Environment.getExternalStorageDirectory();
+        }
+
+        if (storageDir != null && !storageDir.exists()) {
+            storageDir.mkdirs();
+        }
+
         showSaveDialog(storageDir);
     }
 
     private void saveToFile(File file) {
         try {
+            // Create parent directories if they don't exist
+            File parentDir = file.getParentFile();
+            if (parentDir != null && !parentDir.exists()) {
+                parentDir.mkdirs();
+            }
+
+            // Write to file
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             writer.write(textEditor.getText().toString());
             writer.close();
@@ -253,9 +305,21 @@ public class TextEditorActivity extends AppCompatActivity {
             currentFilePath.setText(file.getName());
             originalContent = textEditor.getText().toString();
             setModified(false);
-            showToast("File saved: " + file.getName());
+            showToast("✓ File saved: " + file.getName());
         } catch (IOException e) {
             showToast("Error saving file: " + e.getMessage());
+            e.printStackTrace();
+
+            // Show detailed error dialog
+            new AlertDialog.Builder(this)
+                    .setTitle("Save Error")
+                    .setMessage("Failed to save file:\n" + e.getMessage() +
+                            "\n\nTry saving to a different location.")
+                    .setPositiveButton("OK", null)
+                    .show();
+        } catch (Exception e) {
+            showToast("Unexpected error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -263,10 +327,15 @@ public class TextEditorActivity extends AppCompatActivity {
         if (undoStack.size() > 1) {
             redoStack.push(undoStack.pop());
             String previousState = undoStack.peek();
-            textEditor.removeTextChangedListener(null); // Temporarily remove listener
+
+            isUndoRedoOperation = true;
             textEditor.setText(previousState);
-            setupEventListeners(); // Re-add listener
+            textEditor.setSelection(textEditor.getText().length()); // Move cursor to end
+            isUndoRedoOperation = false;
+
             showToast("Undo");
+        } else {
+            showToast("Nothing to undo");
         }
     }
 
@@ -274,10 +343,15 @@ public class TextEditorActivity extends AppCompatActivity {
         if (!redoStack.isEmpty()) {
             String nextState = redoStack.pop();
             undoStack.push(nextState);
-            textEditor.removeTextChangedListener(null); // Temporarily remove listener
+
+            isUndoRedoOperation = true;
             textEditor.setText(nextState);
-            setupEventListeners(); // Re-add listener
+            textEditor.setSelection(textEditor.getText().length()); // Move cursor to end
+            isUndoRedoOperation = false;
+
             showToast("Redo");
+        } else {
+            showToast("Nothing to redo");
         }
     }
 
@@ -297,7 +371,10 @@ public class TextEditorActivity extends AppCompatActivity {
 
     private void searchNext() {
         String query = searchEditText.getText().toString();
-        if (query.isEmpty()) return;
+        if (query.isEmpty()) {
+            showToast("Enter search text");
+            return;
+        }
 
         String content = textEditor.getText().toString();
         if (!query.equals(lastSearchQuery)) {
@@ -316,6 +393,7 @@ public class TextEditorActivity extends AppCompatActivity {
         if (foundPos != -1) {
             currentSearchPosition = foundPos;
             textEditor.setSelection(foundPos, foundPos + query.length());
+            textEditor.requestFocus();
             showToast("Found at position " + foundPos);
         } else {
             showToast("Not found");
@@ -323,7 +401,6 @@ public class TextEditorActivity extends AppCompatActivity {
     }
 
     private void clearSearchHighlight() {
-        // Implementation for clearing search highlights
         currentSearchPosition = -1;
         lastSearchQuery = "";
     }
@@ -361,7 +438,9 @@ public class TextEditorActivity extends AppCompatActivity {
                 saveAsFile();
                 break;
             case "clear":
+                isUndoRedoOperation = true;
                 textEditor.setText("");
+                isUndoRedoOperation = false;
                 break;
             case "count":
                 showWordCount();
@@ -369,6 +448,8 @@ public class TextEditorActivity extends AppCompatActivity {
             case "goto":
                 if (parts.length > 1) {
                     gotoLine(parts[1]);
+                } else {
+                    showToast("Usage: goto [line_number]");
                 }
                 break;
             case "find":
@@ -383,6 +464,8 @@ public class TextEditorActivity extends AppCompatActivity {
             case "replace":
                 if (parts.length > 2) {
                     replaceText(parts[1], parts[2]);
+                } else {
+                    showToast("Usage: replace [old_text] [new_text]");
                 }
                 break;
             case "exit":
@@ -395,7 +478,7 @@ public class TextEditorActivity extends AppCompatActivity {
     }
 
     private void showCommandHelp() {
-        String help = "Available Commands:\n" +
+        String help = "📝 Available Commands:\n\n" +
                 "help - Show this help\n" +
                 "new - Create new file\n" +
                 "open [path] - Open file\n" +
@@ -420,6 +503,15 @@ public class TextEditorActivity extends AppCompatActivity {
         if (file.exists() && file.isFile()) {
             loadFile(file);
         } else {
+            // Try relative path from documents directory
+            File docsDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+            if (docsDir != null) {
+                file = new File(docsDir, path);
+                if (file.exists() && file.isFile()) {
+                    loadFile(file);
+                    return;
+                }
+            }
             showToast("File not found: " + path);
         }
     }
@@ -428,11 +520,12 @@ public class TextEditorActivity extends AppCompatActivity {
         String text = textEditor.getText().toString();
         int chars = text.length();
         int words = text.trim().isEmpty() ? 0 : text.trim().split("\\s+").length;
-        int lines = text.split("\n").length;
+        int lines = text.isEmpty() ? 0 : text.split("\n").length;
 
-        String message = String.format("Characters: %d\nWords: %d\nLines: %d", chars, words, lines);
+        String message = String.format("📊 Document Statistics:\n\nCharacters: %d\nWords: %d\nLines: %d",
+                chars, words, lines);
         new AlertDialog.Builder(this)
-                .setTitle("Document Statistics")
+                .setTitle("Statistics")
                 .setMessage(message)
                 .setPositiveButton("OK", null)
                 .show();
@@ -450,9 +543,10 @@ public class TextEditorActivity extends AppCompatActivity {
                     position += lines[i].length() + 1; // +1 for newline
                 }
                 textEditor.setSelection(position);
-                showToast("Moved to line " + line);
+                textEditor.requestFocus();
+                showToast("✓ Moved to line " + line);
             } else {
-                showToast("Line number out of range");
+                showToast("Line number out of range (1-" + lines.length + ")");
             }
         } catch (NumberFormatException e) {
             showToast("Invalid line number");
@@ -461,14 +555,27 @@ public class TextEditorActivity extends AppCompatActivity {
 
     private void replaceText(String oldText, String newText) {
         String content = textEditor.getText().toString();
-        String replaced = content.replace(oldText, newText);
-        textEditor.setText(replaced);
-        showToast("Text replaced");
+        int count = 0;
+        String temp = content;
+        while (temp.contains(oldText)) {
+            temp = temp.replaceFirst(oldText, "");
+            count++;
+        }
+
+        if (count > 0) {
+            String replaced = content.replace(oldText, newText);
+            isUndoRedoOperation = true;
+            textEditor.setText(replaced);
+            isUndoRedoOperation = false;
+            showToast("✓ Replaced " + count + " occurrence(s)");
+        } else {
+            showToast("Text not found: " + oldText);
+        }
     }
 
     private void updateLineNumbers() {
         String text = textEditor.getText().toString();
-        int lineCount = text.isEmpty() ? 1 : text.split("\n").length;
+        int lineCount = text.isEmpty() ? 1 : text.split("\n", -1).length;
 
         StringBuilder lineNums = new StringBuilder();
         for (int i = 1; i <= lineCount; i++) {
@@ -482,9 +589,10 @@ public class TextEditorActivity extends AppCompatActivity {
         int cursorPos = textEditor.getSelectionStart();
 
         // Calculate line and column
-        String beforeCursor = text.substring(0, cursorPos);
-        int line = beforeCursor.split("\n").length;
-        int column = beforeCursor.length() - beforeCursor.lastIndexOf('\n');
+        String beforeCursor = text.substring(0, Math.min(cursorPos, text.length()));
+        String[] lines = beforeCursor.split("\n", -1);
+        int line = lines.length;
+        int column = lines[lines.length - 1].length() + 1;
 
         lineInfo.setText(String.format("Ln %d, Col %d", line, column));
         charCount.setText(text.length() + " chars");
@@ -500,11 +608,13 @@ public class TextEditorActivity extends AppCompatActivity {
 
     private void showSaveDialog(Runnable onDiscard) {
         new AlertDialog.Builder(this)
-                .setTitle("Unsaved Changes")
+                .setTitle("💾 Unsaved Changes")
                 .setMessage("Do you want to save changes before continuing?")
                 .setPositiveButton("Save", (dialog, which) -> {
                     saveFile();
-                    onDiscard.run();
+                    if (!isModified) { // Only continue if save was successful
+                        onDiscard.run();
+                    }
                 })
                 .setNegativeButton("Discard", (dialog, which) -> onDiscard.run())
                 .setNeutralButton("Cancel", null)
@@ -512,9 +622,14 @@ public class TextEditorActivity extends AppCompatActivity {
     }
 
     private void showFileDialog(File directory, boolean isOpen, FileDialogCallback callback) {
+        if (directory == null || !directory.exists()) {
+            showToast("Cannot access directory");
+            return;
+        }
+
         File[] files = directory.listFiles();
         if (files == null) {
-            showToast("Cannot access directory");
+            showToast("Cannot read directory");
             return;
         }
 
@@ -522,40 +637,63 @@ public class TextEditorActivity extends AppCompatActivity {
         List<String> fileNames = new ArrayList<>();
 
         // Add parent directory option
-        if (!directory.equals(Environment.getExternalStorageDirectory())) {
+        if (directory.getParentFile() != null && directory.getParentFile().canRead()) {
             fileList.add(directory.getParentFile());
-            fileNames.add("../");
+            fileNames.add("📁 ../");
         }
 
         // Add directories first
         for (File file : files) {
-            if (file.isDirectory()) {
+            if (file.isDirectory() && file.canRead()) {
                 fileList.add(file);
-                fileNames.add(file.getName() + "/");
+                fileNames.add("📁 " + file.getName());
             }
         }
 
-        // Add files
+        // Add text files
         for (File file : files) {
-            if (file.isFile()) {
-                fileList.add(file);
-                fileNames.add(file.getName());
+            if (file.isFile() && file.canRead()) {
+                String name = file.getName();
+                if (name.endsWith(".txt") || name.endsWith(".log") ||
+                        name.endsWith(".md") || name.endsWith(".java") ||
+                        name.endsWith(".xml") || name.endsWith(".json")) {
+                    fileList.add(file);
+                    fileNames.add("📄 " + name);
+                }
             }
+        }
+
+        if (fileList.isEmpty()) {
+            showToast("No files found in this directory");
+            if (!isOpen) {
+                showSaveNameDialog(directory, callback);
+            }
+            return;
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(isOpen ? "Open File" : "Save Location");
+        builder.setTitle(isOpen ? "📂 Open File" : "📂 Save Location");
         builder.setItems(fileNames.toArray(new String[0]), (dialog, which) -> {
             File selectedFile = fileList.get(which);
             if (selectedFile.isDirectory()) {
                 showFileDialog(selectedFile, isOpen, callback);
             } else {
-                callback.onFileSelected(selectedFile);
+                if (isOpen) {
+                    callback.onFileSelected(selectedFile);
+                } else {
+                    // Ask for confirmation to overwrite
+                    new AlertDialog.Builder(this)
+                            .setTitle("Overwrite File?")
+                            .setMessage("File already exists. Overwrite?")
+                            .setPositiveButton("Overwrite", (d, w) -> callback.onFileSelected(selectedFile))
+                            .setNegativeButton("Cancel", null)
+                            .show();
+                }
             }
         });
 
         if (!isOpen) {
-            builder.setNeutralButton("Save Here", (dialog, which) -> {
+            builder.setNeutralButton("💾 New File", (dialog, which) -> {
                 showSaveNameDialog(directory, callback);
             });
         }
@@ -569,18 +707,30 @@ public class TextEditorActivity extends AppCompatActivity {
     }
 
     private void showSaveNameDialog(File directory, FileDialogCallback callback) {
-        EditText input = new EditText(this);
+        final EditText input = new EditText(this);
         input.setHint("filename.txt");
         input.setText(currentFile != null ? currentFile.getName() : "untitled.txt");
+        input.setSelection(input.getText().length());
 
         new AlertDialog.Builder(this)
-                .setTitle("Enter filename")
+                .setTitle("💾 Enter filename")
+                .setMessage("Current location: " + directory.getAbsolutePath())
                 .setView(input)
                 .setPositiveButton("Save", (dialog, which) -> {
                     String filename = input.getText().toString().trim();
                     if (!filename.isEmpty()) {
                         File file = new File(directory, filename);
-                        callback.onFileSelected(file);
+                        if (file.exists()) {
+                            // Ask for confirmation
+                            new AlertDialog.Builder(this)
+                                    .setTitle("Overwrite File?")
+                                    .setMessage("File already exists. Overwrite?")
+                                    .setPositiveButton("Overwrite", (d, w) -> callback.onFileSelected(file))
+                                    .setNegativeButton("Cancel", null)
+                                    .show();
+                        } else {
+                            callback.onFileSelected(file);
+                        }
                     } else {
                         showToast("Please enter a filename");
                     }
@@ -616,61 +766,10 @@ public class TextEditorActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showToast("Storage permission granted");
+                showToast("✓ Storage permission granted");
             } else {
-                showToast("Storage permission denied. File operations may not work.");
+                showToast("⚠ Storage permission denied. Limited functionality.");
             }
         }
-    }
-
-    // Syntax highlighting methods (basic implementation)
-    private void applySyntaxHighlighting(String text) {
-        // Basic syntax highlighting for common programming languages
-        // This is a simplified version - you can expand this based on file extension
-
-        SpannableString spannable = new SpannableString(text);
-
-        // Keywords highlighting (example for Java/JavaScript)
-        String[] keywords = {"public", "private", "protected", "class", "interface",
-                "function", "var", "let", "const", "if", "else", "for",
-                "while", "return", "import", "export", "package"};
-
-        int keywordColor = ContextCompat.getColor(this, android.R.color.holo_blue_bright);
-
-        for (String keyword : keywords) {
-            int startIndex = 0;
-            while ((startIndex = text.toLowerCase().indexOf(keyword, startIndex)) != -1) {
-                // Check if it's a whole word
-                boolean isWholeWord = (startIndex == 0 || !Character.isLetterOrDigit(text.charAt(startIndex - 1))) &&
-                        (startIndex + keyword.length() >= text.length() ||
-                                !Character.isLetterOrDigit(text.charAt(startIndex + keyword.length())));
-
-                if (isWholeWord) {
-                    spannable.setSpan(new BackgroundColorSpan(keywordColor), startIndex,
-                            startIndex + keyword.length(), 0);
-                }
-                startIndex += keyword.length();
-            }
-        }
-
-        // You can add more syntax highlighting rules here
-        // For example: strings, comments, numbers, etc.
-    }
-
-    // Auto-save functionality
-    private void enableAutoSave() {
-        // Implementation for auto-save every 30 seconds
-        new Thread(() -> {
-            while (!isFinishing()) {
-                try {
-                    Thread.sleep(30000); // 30 seconds
-                    if (isModified && currentFile != null) {
-                        runOnUiThread(() -> saveFile());
-                    }
-                } catch (InterruptedException e) {
-                    break;
-                }
-            }
-        }).start();
     }
 }

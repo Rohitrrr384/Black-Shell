@@ -1,0 +1,89 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Background -->
+    <path
+        android:fillColor="#0D0D0D"
+        android:pathData="M0,0h108v108h-108z"/>
+
+    <!-- Glowing outer ring -->
+    <path
+        android:strokeWidth="3"
+        android:pathData="M54,16 A38,38 0 1,1 54,92 A38,38 0 1,1 54,16"
+        android:strokeColor="#00FF41"
+        android:fillColor="#00000000"/>
+
+    <!-- Inner darker circle -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M54,54m-32,0a32,32 0 1,1 64,0a32,32 0 1,1 -64,0"/>
+
+    <!-- Terminal bracket [ -->
+    <path
+        android:strokeWidth="3.5"
+        android:strokeColor="#00FF41"
+        android:pathData="M42,35 L37,35 L37,73 L42,73"
+        android:fillColor="#00000000"/>
+
+    <!-- Greater than symbol > (prompt) -->
+    <path
+        android:fillColor="#00FF41"
+        android:pathData="M45,48 L55,54 L45,60 Z"/>
+
+    <!-- Underscore cursor -->
+    <path
+        android:fillColor="#00FF41"
+        android:pathData="M58,56 h8 v3 h-8 z"/>
+
+    <!-- Terminal bracket ] -->
+    <path
+        android:strokeWidth="3.5"
+        android:strokeColor="#00FF41"
+        android:pathData="M66,35 L71,35 L71,73 L66,73"
+        android:fillColor="#00000000"/>
+
+    <!-- Bottom command line -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#00DD33"
+        android:pathData="M30,64 h48"
+        android:fillColor="#00000000"/>
+
+    <!-- Matrix-style falling dots (top) -->
+    <!-- Corner accents -->
+    <path
+        android:strokeWidth="2.5"
+        android:strokeColor="#00FF41"
+        android:pathData="M25,40 L25,32 L33,32"
+        android:fillColor="#00000000"/>
+    <path
+        android:strokeWidth="2.5"
+        android:strokeColor="#00FF41"
+        android:pathData="M83,40 L83,32 L75,32"
+        android:fillColor="#00000000"/>
+    <path
+        android:strokeWidth="2.5"
+        android:strokeColor="#00FF41"
+        android:pathData="M25,68 L25,76 L33,76"
+        android:fillColor="#00000000"/>
+    <path
+        android:strokeWidth="2.5"
+        android:strokeColor="#00FF41"
+        android:pathData="M83,68 L83,76 L75,76"
+        android:fillColor="#00000000"/>
+
+    <!-- Subtle code-like elements -->
+    <path
+        android:strokeWidth="1.5"
+        android:strokeColor="#00BB33"
+        android:pathData="M32,44 h6"
+        android:fillColor="#00000000"/>
+    <path
+        android:strokeWidth="1.5"
+        android:strokeColor="#00BB33"
+        android:pathData="M70,44 h6"
+        android:fillColor="#00000000"/>
+</vector>

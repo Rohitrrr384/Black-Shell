@@ -22,8 +22,6 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import androidx.activity.OnBackPressedCallback;
-import androidx.activity.OnBackPressedDispatcher;
 
 public class FileManagerActivity extends AppCompatActivity {
     private RecyclerView fileListView;
@@ -43,8 +41,6 @@ public class FileManagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Set the XML layout instead of programmatic layout
         setContentView(R.layout.activity_file_manager);
 
         fsManager = FileSystemManager.getInstance(this);
@@ -65,17 +61,14 @@ public class FileManagerActivity extends AppCompatActivity {
     }
 
     private void setupBackPressHandler() {
-        // Modern way to handle back press
         OnBackPressedDispatcher dispatcher = getOnBackPressedDispatcher();
         dispatcher.addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 if (fsManager.getCurrentDirectory().equals("/")) {
-                    // At root, allow normal back behavior (exit activity)
                     setEnabled(false);
                     getOnBackPressedDispatcher().onBackPressed();
                 } else {
-                    // Not at root, navigate up
                     navigateUp();
                 }
             }
@@ -83,38 +76,32 @@ public class FileManagerActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
-        // Initialize views from XML
         fileListView = findViewById(R.id.rv_file_list);
         currentPathView = findViewById(R.id.tv_current_path);
         diskUsageView = findViewById(R.id.tv_disk_usage);
 
-        // Navigation buttons
         btnBack = findViewById(R.id.btn_back);
         btnUp = findViewById(R.id.btn_up);
         btnHome = findViewById(R.id.btn_home);
         btnRoot = findViewById(R.id.btn_root);
 
-        // Action buttons
         btnNewFolder = findViewById(R.id.btn_new_folder);
         btnNewFile = findViewById(R.id.btn_new_file);
         btnTerminal = findViewById(R.id.btn_terminal);
         btnPaste = findViewById(R.id.btn_paste);
         btnRefresh = findViewById(R.id.btn_refresh);
 
-        // Setup RecyclerView
         fileListView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new FileListAdapter();
         fileListView.setAdapter(adapter);
     }
 
     private void setupListeners() {
-        // Navigation button listeners
         btnBack.setOnClickListener(v -> navigateBack());
         btnUp.setOnClickListener(v -> navigateUp());
         btnHome.setOnClickListener(v -> navigateHome());
         btnRoot.setOnClickListener(v -> navigateRoot());
 
-        // Action button listeners
         btnNewFolder.setOnClickListener(v -> showNewFolderDialog());
         btnNewFile.setOnClickListener(v -> showNewFileDialog());
         btnTerminal.setOnClickListener(v -> openTerminal());
@@ -123,8 +110,7 @@ public class FileManagerActivity extends AppCompatActivity {
     }
 
     private void navigateBack() {
-        // Navigate back in history (if implemented)
-        navigateUp(); // For now, just go up
+        navigateUp();
     }
 
     private void navigateUp() {
@@ -146,7 +132,6 @@ public class FileManagerActivity extends AppCompatActivity {
     }
 
     private void updateDiskUsage() {
-        // Get disk usage info
         File currentDir = new File(fsManager.getAbsoluteCurrentDirectory());
         long freeSpace = currentDir.getFreeSpace();
         String freeSpaceFormatted = formatFileSize(freeSpace);
@@ -156,7 +141,6 @@ public class FileManagerActivity extends AppCompatActivity {
     private void refreshFileList() {
         currentFiles.clear();
 
-        // Add parent directory if not at root
         String currentDir = fsManager.getCurrentDirectory();
         if (!currentDir.isEmpty() && !currentDir.equals("/")) {
             currentFiles.add(new ParentDirItem());
@@ -165,17 +149,13 @@ public class FileManagerActivity extends AppCompatActivity {
         currentFiles.addAll(fsManager.listFiles());
         adapter.notifyDataSetChanged();
 
-        // Update path display with Kali-style format
         String displayPath = currentDir.isEmpty() ? "~" : currentDir;
         if (displayPath.startsWith("/home/" + System.getProperty("user.name"))) {
             displayPath = displayPath.replace("/home/" + System.getProperty("user.name"), "~");
         }
         currentPathView.setText(displayPath);
 
-        // Update disk usage
         updateDiskUsage();
-
-        // Update paste button state
         updatePasteButton();
     }
 
@@ -189,7 +169,6 @@ public class FileManagerActivity extends AppCompatActivity {
         }
     }
 
-    // Keep existing dialog methods but with improved styling
     private void showNewFolderDialog() {
         showInputDialog("📁 Create New Folder", "Folder name:", name -> {
             if (fsManager.createDirectory(name)) {
@@ -216,7 +195,6 @@ public class FileManagerActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.KaliAlertDialog);
         builder.setTitle(title);
 
-        // Create custom input layout
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(24, 16, 24, 16);
@@ -225,7 +203,6 @@ public class FileManagerActivity extends AppCompatActivity {
         EditText input = new EditText(this);
         input.setHint(hint);
 
-        // Apply styling using layout params and theme attributes instead of setStyle
         LinearLayout.LayoutParams inputParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -233,10 +210,9 @@ public class FileManagerActivity extends AppCompatActivity {
         inputParams.setMargins(0, 8, 0, 8);
         input.setLayoutParams(inputParams);
 
-        // Apply theme attributes programmatically
         input.setTextColor(getResources().getColor(R.color.kali_text_primary));
         input.setHintTextColor(getResources().getColor(R.color.kali_text_tertiary));
-        input.setBackgroundResource(R.drawable.kali_edittext_background); // Assumes you have this drawable
+        input.setBackgroundResource(R.drawable.kali_edittext_background);
 
         layout.addView(input);
 
@@ -259,62 +235,83 @@ public class FileManagerActivity extends AppCompatActivity {
         startActivityForResult(intent, 100);
     }
 
-    // Modified context menu to use custom dialog
+    // FIXED: Context menu with proper dialog dismissal
     private void showFileContextMenu(FileItem file) {
         selectedFile = file;
 
-        // Create custom context menu dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.KaliAlertDialog);
         View contextView = getLayoutInflater().inflate(R.layout.context_menu_dialog, null);
 
         TextView header = contextView.findViewById(R.id.tv_menu_header);
         header.setText(file.getName());
 
-        // Set up menu items
-        setupContextMenuItem(contextView, R.id.menu_open, "📂 Open", () -> openFile(file));
+        builder.setView(contextView);
+        AlertDialog dialog = builder.create();
+
+        // FIXED: Pass dialog reference to setupContextMenuItem
+        setupContextMenuItem(contextView, R.id.menu_open, "📂 Open", () -> {
+            dialog.dismiss();
+            openFile(file);
+        });
 
         if (!file.isDirectory()) {
-            setupContextMenuItem(contextView, R.id.menu_edit, "✏️ Edit", () -> editFile(file));
+            setupContextMenuItem(contextView, R.id.menu_edit, "✏️ Edit", () -> {
+                dialog.dismiss();
+                editFile(file);
+            });
         } else {
             contextView.findViewById(R.id.menu_edit).setVisibility(View.GONE);
         }
 
-        setupContextMenuItem(contextView, R.id.menu_copy, "📋 Copy", () -> copyFile(file));
-        setupContextMenuItem(contextView, R.id.menu_cut, "✂️ Cut", () -> cutFile(file));
-        setupContextMenuItem(contextView, R.id.menu_rename, "🏷️ Rename", () -> renameFile(file));
-        setupContextMenuItem(contextView, R.id.menu_delete, "🗑️ Delete", () -> deleteFile(file));
-        setupContextMenuItem(contextView, R.id.menu_properties, "ℹ️ Properties", () -> showProperties(file));
+        setupContextMenuItem(contextView, R.id.menu_copy, "📋 Copy", () -> {
+            dialog.dismiss();
+            copyFile(file);
+        });
+
+        setupContextMenuItem(contextView, R.id.menu_cut, "✂️ Cut", () -> {
+            dialog.dismiss();
+            cutFile(file);
+        });
+
+        setupContextMenuItem(contextView, R.id.menu_rename, "🏷️ Rename", () -> {
+            dialog.dismiss();
+            renameFile(file);
+        });
+
+        setupContextMenuItem(contextView, R.id.menu_delete, "🗑️ Delete", () -> {
+            dialog.dismiss();
+            deleteFile(file);
+        });
+
+        setupContextMenuItem(contextView, R.id.menu_properties, "ℹ️ Properties", () -> {
+            dialog.dismiss();
+            showProperties(file);
+        });
 
         if (file.isDirectory()) {
-            setupContextMenuItem(contextView, R.id.menu_terminal, "💻 Open in Terminal", () -> openInTerminal(file));
+            setupContextMenuItem(contextView, R.id.menu_terminal, "💻 Open in Terminal", () -> {
+                dialog.dismiss();
+                openInTerminal(file);
+            });
         } else {
             contextView.findViewById(R.id.menu_terminal).setVisibility(View.GONE);
         }
 
-        builder.setView(contextView);
-        AlertDialog dialog = builder.create();
         dialog.show();
     }
 
+    // FIXED: Simplified setupContextMenuItem - action handles dialog dismissal
     private void setupContextMenuItem(View parent, int itemId, String text, Runnable action) {
         TextView item = parent.findViewById(itemId);
         item.setText(text);
-        item.setOnClickListener(v -> {
-            action.run();
-            // Close any open dialogs
-            if (parent.getParent() instanceof ViewGroup) {
-                ((AlertDialog) ((View) parent.getParent()).getTag()).dismiss();
-            }
-        });
+        item.setOnClickListener(v -> action.run());
     }
 
-    // Keep existing file operation methods unchanged
     private void openFile(FileItem file) {
         if (file.isDirectory()) {
             fsManager.changeDirectory(file.getName());
             refreshFileList();
         } else {
-            // Open file based on extension
             String name = file.getName().toLowerCase();
             if (isEditableFile(name)) {
                 editFile(file);
@@ -347,7 +344,6 @@ public class FileManagerActivity extends AppCompatActivity {
         }
     }
 
-    // Keep existing rename, copy, cut, delete, properties methods...
     private void renameFile(FileItem file) {
         showInputDialog("🏷️ Rename File", "New name:", newName -> {
             if (fsManager.renameFile(file.getName(), newName)) {
@@ -412,7 +408,6 @@ public class FileManagerActivity extends AppCompatActivity {
         builder.show();
     }
 
-    // Keep existing utility methods...
     private String formatFileSize(long size) {
         if (size < 1024) return size + " B";
         if (size < 1024 * 1024) return String.format("%.1f KB", size / 1024.0);
@@ -461,7 +456,6 @@ public class FileManagerActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    // Modified Adapter for XML layout
     private class FileListAdapter extends RecyclerView.Adapter<FileViewHolder> {
 
         @Override
@@ -481,7 +475,6 @@ public class FileManagerActivity extends AppCompatActivity {
                 holder.sizeView.setText("---");
                 holder.permissionsView.setText("---");
             } else {
-                // Set icon and colors based on file type
                 if (file.isDirectory()) {
                     holder.iconView.setText("📁");
                     holder.nameView.setTextColor(getResources().getColor(R.color.kali_blue));
@@ -500,7 +493,6 @@ public class FileManagerActivity extends AppCompatActivity {
                 File f = new File(fsManager.getAbsoluteCurrentDirectory() + "/" + file.getName());
                 holder.permissionsView.setText(getPermissions(f));
 
-                // Set permission text color based on permissions
                 String perms = getPermissions(f);
                 if (perms.contains("x")) {
                     holder.permissionsView.setTextColor(getResources().getColor(R.color.kali_green));
@@ -560,7 +552,6 @@ public class FileManagerActivity extends AppCompatActivity {
         return "File";
     }
 
-    // ViewHolder class for XML layout
     private static class FileViewHolder extends RecyclerView.ViewHolder {
         TextView iconView, nameView, typeView, sizeView, permissionsView, contextMenuView;
 
@@ -575,12 +566,10 @@ public class FileManagerActivity extends AppCompatActivity {
         }
     }
 
-    // Keep existing interfaces
     private interface InputCallback {
         void onInput(String input);
     }
 
-    // Static launch method
     public static void launch(Activity context, String directory) {
         Intent intent = new Intent(context, FileManagerActivity.class);
         intent.putExtra("currentDirectory", directory);

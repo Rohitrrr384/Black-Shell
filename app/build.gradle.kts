@@ -38,9 +38,22 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.room.common.jvm)
+    implementation(libs.test.core)
+    implementation(libs.androidx.junit)
+    implementation(libs.androidx.espresso.core)
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation(libs.okhttp)
+    androidTestImplementation (libs.junit.v115)
+    androidTestImplementation (libs.espresso.core.v351)
+    androidTestImplementation (libs.test.core)
+    androidTestImplementation (libs.rules)
+    androidTestImplementation (libs.runner)
+
+    androidTestImplementation (libs.espresso.web)
+
 
     implementation (libs.room.runtime)
     annotationProcessor (libs.room.compiler)
@@ -49,5 +62,8 @@ dependencies {
     implementation (libs.lifecycle.viewmodel)
     implementation (libs.lifecycle.livedata)
 
+
+
     implementation(libs.org.eclipse.jgit)
+    implementation(libs.jsch)
 }

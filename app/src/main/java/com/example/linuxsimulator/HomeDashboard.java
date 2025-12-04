@@ -208,8 +208,19 @@ public class HomeDashboard extends AppCompatActivity {
         });
 
         wifiAnalyzerCard.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeDashboard.this, WiFiAnalyzer.class);
-            startActivity(intent);
+            String[] possiblePackages = {"com.termux", "com.termux.app"};
+            Intent launchIntent = null;
+
+            for (String pkg : possiblePackages) {
+                launchIntent = getPackageManager().getLaunchIntentForPackage(pkg);
+                if (launchIntent != null) break;
+            }
+
+            if (launchIntent != null) {
+                startActivity(launchIntent);
+            } else {
+                Toast.makeText(this, "Termux not installed", Toast.LENGTH_SHORT).show();
+            }
         });
 
         portScannerCard.setOnClickListener(v -> {

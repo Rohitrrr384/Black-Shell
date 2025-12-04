@@ -143,9 +143,9 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <!-- Thin Transparent Sidebar with Icons Only -->
+        <!-- Thin Transparent Sidebar with Icons and Labels -->
         <LinearLayout
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="#30000000"
@@ -164,61 +164,133 @@
                     android:orientation="vertical"
                     android:gravity="center_horizontal">
 
-                    <!-- Terminal Icon -->
-                    <ImageView
-                        android:id="@+id/terminalIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_terminal"
-                        android:layout_marginBottom="12dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:contentDescription="Terminal"
-                        app:tint="@color/kali_green" />
-
-                    <!-- Text Editor Icon -->
-                    <ImageView
-                        android:id="@+id/textEditorIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_editor"
-                        android:layout_marginBottom="12dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:contentDescription="Text Editor"
-                        app:tint="@color/kali_green" />
-
-                    <!-- Calculator Icon -->
-                    <ImageView
-                        android:id="@+id/calculatorIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_calculator"
-                        android:layout_marginBottom="12dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:contentDescription="Calculator"
-                        app:tint="@color/kali_green" />
-
-                    <!-- Browser Icon -->
-                    <ImageView
-                        android:id="@+id/browserIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_browser"
+                    <!-- Terminal Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
                         android:layout_marginBottom="16dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:focusable="true"
-                        android:contentDescription="Browser"
-                        app:tint="@color/kali_green" />
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:id="@+id/terminalIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_terminal"
+                            android:contentDescription="Terminal-1"
+                            app:tint="@color/kali_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Terminal-1"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
+
+                    <!-- Text Editor Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:id="@+id/textEditorIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_editor"
+                            android:contentDescription="Text Editor"
+                            app:tint="@color/kali_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Editor"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
+
+                    <!-- Calculator Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:id="@+id/calculatorIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_calculator"
+                            android:contentDescription="Calculator"
+                            app:tint="@color/kali_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Calculator"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
+
+                    <!-- Browser Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginBottom="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:id="@+id/browserIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_browser"
+                            android:contentDescription="Browser"
+                            app:tint="@color/kali_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Browser"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
 
                     <!-- Section Divider -->
                     <View
@@ -228,61 +300,133 @@
                         android:layout_marginBottom="16dp"
                         android:alpha="0.5" />
 
-                    <!-- Settings Icon -->
-                    <ImageView
-                        android:id="@+id/settingsIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_settings"
-                        android:layout_marginBottom="12dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:contentDescription="Settings"
-                        app:tint="@color/kali_green" />
-
-                    <!-- File Manager Icon -->
-                    <ImageView
-                        android:id="@+id/fileManagerIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_folder"
-                        android:layout_marginBottom="12dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:contentDescription="Files"
-                        app:tint="@color/kali_green" />
-
-                    <!-- Network Tools Icon -->
-                    <ImageView
-                        android:id="@+id/networkToolsIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_network_tools"
-                        android:layout_marginBottom="12dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:contentDescription="Network"
-                        app:tint="@color/kali_green" />
-
-                    <!-- System Info Icon -->
-                    <ImageView
-                        android:id="@+id/systemInfoIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_system_info"
+                    <!-- Settings Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
                         android:layout_marginBottom="16dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:focusable="true"
-                        android:contentDescription="System Info"
-                        app:tint="@color/kali_green" />
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:id="@+id/settingsIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_settings"
+                            android:contentDescription="Settings"
+                            app:tint="@color/kali_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Settings"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
+
+                    <!-- File Manager Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:id="@+id/fileManagerIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_folder"
+                            android:contentDescription="Files"
+                            app:tint="@color/kali_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Files"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
+
+                    <!-- Network Tools Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:id="@+id/networkToolsIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_network_tools"
+                            android:contentDescription="Network"
+                            app:tint="@color/kali_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Network"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
+
+                    <!-- System Info Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginBottom="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:id="@+id/systemInfoIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_system_info"
+                            android:contentDescription="System Info"
+                            app:tint="@color/kali_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="System"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
 
                     <!-- Section Divider -->
                     <View
@@ -292,61 +436,133 @@
                         android:layout_marginBottom="16dp"
                         android:alpha="0.5" />
 
-                    <!-- Crypto Tools Icon -->
-                    <ImageView
-                        android:id="@+id/cryptoToolsIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_crypto"
-                        android:layout_marginBottom="12dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                    <!-- Crypto Tools Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:contentDescription="Crypto Tools"
-                        app:tint="@color/kali_green" />
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
 
-                    <!-- Password Gen Icon -->
-                    <ImageView
-                        android:id="@+id/passwordGenIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_password"
-                        android:layout_marginBottom="12dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:contentDescription="Password Gen"
-                        app:tint="@color/kali_green" />
+                        <ImageView
+                            android:id="@+id/cryptoToolsIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_crypto"
+                            android:contentDescription="Crypto Tools"
+                            app:tint="@color/kali_green" />
 
-                    <!-- WiFi Analyzer Icon -->
-                    <ImageView
-                        android:id="@+id/wifiAnalyzerIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_wifi"
-                        android:layout_marginBottom="12dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:contentDescription="WiFi Analyzer"
-                        app:tint="@color/kali_green" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Crypto"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
 
-                    <!-- Port Scanner Icon -->
-                    <ImageView
-                        android:id="@+id/portScannerIcon"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_port_scanner"
-                        android:layout_marginBottom="12dp"
-                        android:padding="4dp"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                    <!-- Password Gen Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:contentDescription="Port Scanner"
-                        app:tint="@color/kali_green" />
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:id="@+id/passwordGenIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_password"
+                            android:contentDescription="Password Gen"
+                            app:tint="@color/kali_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Password"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
+
+                    <!-- WiFi Analyzer Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:id="@+id/wifiAnalyzerIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_terminal"
+                            android:contentDescription="Terminal-2"
+                            app:tint="@color/kali_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Terminal-2"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
+
+                    <!-- Port Scanner Icon with Label -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:id="@+id/portScannerIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_port_scanner"
+                            android:contentDescription="Port Scanner"
+                            app:tint="@color/kali_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ports"
+                            android:textColor="@color/kali_green"
+                            android:textSize="9sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
